@@ -62,7 +62,14 @@ require_once('../db.php');
             $valid = false;
             $err_password = "Le champ ne peut pas être vide";
 
-        } elseif($password != $confpassword){
+        } 
+        
+        elseif(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
+            $valid = false;
+            $err_mail = "Format mail invalide";
+        }
+        
+        elseif($password != $confpassword){
             $valid = false;
             $err_password = "Vous avez deux différents mots de passe";
         } 
@@ -98,6 +105,7 @@ require_once('../db.php');
         <label for="pseudo">pseudo</label>
         <input type="text" name="pseudo" id="pseudo" value=" <?php if(isset($pseudo)){ echo $pseudo;} ?>">
 
+        <?php if(isset($err_mail)) {echo '<div>' . $err_mail . '<div>' ; }?>
         <label for="mail">Courriel</label>
         <input type="email" name="mail" id="mail" value=" <?php if(isset($mail)){ echo $mail;} ?>">
 
