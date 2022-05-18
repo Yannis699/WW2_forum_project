@@ -5,6 +5,21 @@ if(!$_SESSION['mdp']){
     header('Location: connexion.php');
 }
 
+if(isset($_POST['envoi'])){ 
+    if(!empty($_POST['titre']) && !empty($_POST['contenu']))
+    {
+        $titre = htmlspecialchars($_POST['titre']);
+        $contenu = nl2br(htmlspecialchars($_POST['contenu']));
+
+        $insererArticle = $bdd->prepare('INSERT INTO Article(titre,contenu) VALUES(?,?)');
+        $insererArticle->execute(array($titre, $contenu));
+
+        echo "L'article a bien été envoyé";
+    } else {
+        echo "Veuillez renseigner l'ensemble des champs";
+        die();
+    }
+}
 
 ?>
 
@@ -19,9 +34,9 @@ if(!$_SESSION['mdp']){
 <body>
 
 <form action="" method="post">
-    <input_type="text" name="titre">
+    <input type="text" name="titre">
     <br>
-    <textarea name="description"></textarea>
+    <textarea name="contenu"></textarea>
     <br>
     <input type="submit" name="envoi">
 </form>
