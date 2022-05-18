@@ -14,6 +14,8 @@ $valid = (boolean) true;
         $pseudo = $data['pseudo'];
         $mail = $data['mail'];
         $confmail = $data['confmail'];
+        $password = $data['password'];
+        $confpassword = $data['confpassword'];
 
         var_dump($data);
         if(empty($pseudo)){
@@ -39,7 +41,7 @@ $valid = (boolean) true;
         elseif($mail != $confmail){
             $valid = false;
             $err_mail = "Le mail est différent de la confirmation";
-            $err_mail;
+
         } else {
             $req = $bdd->prepare['SELECT id FROM User WHERE mail = ?'];
             $req->execute(array($mail));
@@ -49,6 +51,10 @@ $valid = (boolean) true;
         if(empty($password)){
             $valid = false;
             $err_password = "Le champ ne peut pas être vide";
+
+        } elseif($password != $confpassword){
+            $valid = false;
+            $err_password = "Vous avez deux différents mots de passe";
         }
 
         if($valid){
@@ -90,7 +96,7 @@ $valid = (boolean) true;
         <input type="password" name="password" id="" value= "">
 
         <label for=""> Confirmation mot de passe </label>
-        <input type="Confpassword" name="Confpassword" id="">
+        <input type="password" name="confpassword" id="">
 
         <button type="submit" name="inscription">Inscription</button>
     </form>
