@@ -11,13 +11,11 @@ if(isset($_POST['envoi'])){
         $titre = htmlspecialchars($_POST['titre']);
         $contenu = nl2br(htmlspecialchars($_POST['contenu']));
 
-        $insererArticle = $bdd->prepare('INSERT INTO Article(titre,contenu) VALUES(?,?)');
+        $insererArticle = $bdd->prepare('INSERT INTO articles(titre,contenu) VALUES(?,?)');
         $insererArticle->execute(array($titre, $contenu));
 
-        echo "L'article a bien été envoyé";
     } else {
         echo "Veuillez renseigner l'ensemble des champs";
-        die();
     }
 }
 
@@ -34,9 +32,9 @@ if(isset($_POST['envoi'])){
 <body>
 
 <form action="" method="post">
-    <input type="text" name="titre">
+    <input_type="text" name="titre">
     <br>
-    <textarea name="contenu"></textarea>
+    <textarea name="description"></textarea>
     <br>
     <input type="submit" name="envoi">
 </form>

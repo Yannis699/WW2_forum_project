@@ -9,9 +9,9 @@ if(isset($_POST['envoi'])){
     if(!empty($_POST['titre']) && !empty($_POST['contenu']))
     {
         $titre = htmlspecialchars($_POST['titre']);
-        $contenu = nl2br(htmlspecialchars($_POST['contenu']));
+        $contenu = nl2br(htmlspecialchars($_POST['description']));
 
-        $insererArticle = $bdd->prepare('INSERT INTO Article(titre,contenu) VALUES(?,?)');
+        $insererArticle = $bdd->prepare('INSERT INTO articles(titre,contenu) VALUES(?,?)');
         $insererArticle->execute(array($titre, $contenu));
 
         echo "L'article a bien été envoyé";

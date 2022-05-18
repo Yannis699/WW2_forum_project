@@ -11,7 +11,7 @@ if(isset($_POST['envoi'])){
         $titre = htmlspecialchars($_POST['titre']);
         $contenu = nl2br(htmlspecialchars($_POST['contenu']));
 
-        $insererArticle = $bdd->prepare('INSERT INTO Article(titre,contenu) VALUES(?,?)');
+        $insererArticle = $bdd->prepare('INSERT INTO Articles(titre,contenu) VALUES(?,?)');
         $insererArticle->execute(array($titre, $contenu));
 
         echo "L'article a bien été envoyé";

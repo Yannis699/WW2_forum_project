@@ -6,18 +6,17 @@ if(!$_SESSION['mdp']){
 }
 
 if(isset($_POST['envoi'])){ 
-    if(!empty($_POST['titre']) && !empty($_POST['contenu']))
+    if(!empty($_POST['titre']) && !empty($_POST['description']))
     {
         $titre = htmlspecialchars($_POST['titre']);
-        $contenu = nl2br(htmlspecialchars($_POST['contenu']));
+        $contenu = nl2br(htmlspecialchars($_POST['description']));
 
-        $insererArticle = $bdd->prepare('INSERT INTO Article(titre,contenu) VALUES(?,?)');
+        $insererArticle = $bdd->prepare('INSERT INTO articles(titre,contenu) VALUES(?,?)');
         $insererArticle->execute(array($titre, $contenu));
 
         echo "L'article a bien été envoyé";
     } else {
         echo "Veuillez renseigner l'ensemble des champs";
-        die();
     }
 }
 
@@ -36,7 +35,7 @@ if(isset($_POST['envoi'])){
 <form action="" method="post">
     <input type="text" name="titre">
     <br>
-    <textarea name="contenu"></textarea>
+    <textarea name="description"></textarea>
     <br>
     <input type="submit" name="envoi">
 </form>

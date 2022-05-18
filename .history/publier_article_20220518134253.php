@@ -1,8 +1,12 @@
 <?php
 session_start();
+require_once('db.php');
 if(!$_SESSION['mdp']){
     header('Location: connexion.php');
 }
+
+if(isset[$_POST['envoi']])
+
 ?>
 
 <!DOCTYPE html>
@@ -11,12 +15,17 @@ if(!$_SESSION['mdp']){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Publier article</title>
 </head>
 <body>
-    <a href="membres.php">Afficher tous les membres</a>
-    <a href="publier_article.php"> Publier un nouvel article </a>
-    <a href="publier_article.php"> Afficher l'ensemble des articles </a>
-    
+
+<form action="" method="post">
+    <input_type="text" name="titre">
+    <br>
+    <textarea name="description"></textarea>
+    <br>
+    <input type="submit" name="envoi">
+</form>
+
 </body>
 </html>
