@@ -75,8 +75,7 @@ require_once('../db.php');
         } 
 
         if($valid){
-            //$cryptPassword = crypt($password, '$2a$07$fheuihrf77838Y.?/.UIHIUF$' );
-            $cryptPassword = password_hash($password, PASSWORD_ARGON2ID);
+            $cryptPassword = crypt($password, '$2a$07$fheuihrf77838Y.?/.UIHIUF$' );
             $date_creation = date('Y-m-d H:i:s');
             $insertUser = $bdd->prepare("INSERT INTO User(pseudo, mail, mdp, date_creation, date_connexion) VALUES (?,?,?,?,?)");
             $insertUser->execute(array($pseudo, $mail, $cryptPassword, $date_creation, $date_creation));
