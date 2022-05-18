@@ -27,8 +27,6 @@ require_once('../db.php');
 
             <label for=""> Mot de passe </label>
             <input type="password" name="password" id="">
-
-            <button type="submit">Inscription</button>
         </form>
 </body>
 </html>
