@@ -27,6 +27,9 @@ if(!$_SESSION['mdp']){
             <div>
                 <p><?= $article['Contenu']?></p>
             </div>
+            <a href="supprimer_article.php?id=<?= $article['id']; ?>">
+                <button> Supprimer l'article </button>
+            </a>
             <?php
         }
     ?>
