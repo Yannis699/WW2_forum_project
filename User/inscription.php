@@ -15,11 +15,22 @@ require_once('../db.php');
         $confmail = $data['confmail'];
         $password = $data['password'];
         $confpassword = $data['confpassword'];
+        //echo iconv_strlen($pseudo, 'UTF-8'); exit;
 
         if(empty($pseudo)){
             $valid = false;
             $err_pseudo = "Ce champ ne peut pas être vide";
-        }else{
+        }
+
+        elseif(grapheme_strlen($pseudo) < 5){
+            $valid = false;
+            $err_pseudo = "Le pseudo doit faire plus de caractères";
+        }
+        elseif(grapheme_strlen($pseudo)>18){
+            $valid = false;
+            $err_pseudo = "Le pseudo doit faire moins de 18 caractères ; le vôtre fait (" . grapheme_strlen($pseudo) . "/18;";
+        }
+        else{
             $req = $bdd->prepare("SELECT id FROM User WHERE pseudo = ?");
             $req->execute(array($pseudo));
             $req =  $req->fetch();
