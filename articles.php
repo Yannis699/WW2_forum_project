@@ -30,6 +30,9 @@ if(!$_SESSION['mdp']){
             <a href="supprimer_article.php?id=<?= $article['id']; ?>">
                 <button> Supprimer l'article </button>
             </a>
+            <a href="modifier_article.php?id=<?= $article['id']; ?>">
+                <button> Modifier l'article </button>
+            </a>
             <?php
         }
     ?>
