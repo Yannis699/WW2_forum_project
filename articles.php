@@ -24,6 +24,9 @@ if(!$_SESSION['mdp']){
             <div class="article">
                 <h1><?= $article['Titre'] ?></h1>
             </div>
+            <div>
+                <p><?= $article['Contenu']?></p>
+            </div>
             <?php
         }
     ?>
