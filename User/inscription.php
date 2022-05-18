@@ -2,14 +2,13 @@
 
 require_once('../db.php');
 
-var_dump($_POST);
-
-$valid = (boolean) true;
 
     if (isset($_POST['inscription'])) {
 
         $data = array_map('trim', $_POST);
         extract($data);
+
+        $valid = (boolean) true;
 
         $pseudo = $data['pseudo'];
         $mail = $data['mail'];
@@ -17,7 +16,6 @@ $valid = (boolean) true;
         $password = $data['password'];
         $confpassword = $data['confpassword'];
 
-        var_dump($data);
         if(empty($pseudo)){
             $valid = false;
             $err_pseudo = "Ce champ ne peut pas être vide";
@@ -29,6 +27,7 @@ $valid = (boolean) true;
             if(isset($req['id'])){
                 $valid = false;
                 $err_pseudo = "Ce pseudo est déjà pris";
+                echo $err_pseudo;
 
             }
         }
@@ -43,9 +42,9 @@ $valid = (boolean) true;
             $err_mail = "Le mail est différent de la confirmation";
 
         } else {
-            $req = $bdd->prepare['SELECT id FROM User WHERE mail = ?'];
+            $req = $bdd->prepare('SELECT id FROM User WHERE mail = ?');
             $req->execute(array($mail));
-            $req = $rq->fetch();
+            $req = $req->fetch();
         }
 
         if(empty($password)){
@@ -55,10 +54,13 @@ $valid = (boolean) true;
         } elseif($password != $confpassword){
             $valid = false;
             $err_password = "Vous avez deux différents mots de passe";
-        }
+        } 
 
         if($valid){
-            echo 'ok';
+            $cryptPassword = crypt($password, '$2a$07$fheuihrf77838Y.?/.UIHIUF$' );
+            $date_creation = date('Y-m-d H:i:s');
+            $insertUser = $bdd->prepare("INSERT INTO User(pseudo, mail, mdp, date_creation, date_connexion) VALUES (?,?,?,?,?)");
+            $insertUser->execute(array($pseudo, $mail, $cryptPassword, $date_creation, $date_creation));
         }else{
             echo "Vous avez fait une ou plusieurs erreurs";
         }
@@ -96,7 +98,7 @@ $valid = (boolean) true;
         <input type="password" name="password" id="" value= "">
 
         <label for=""> Confirmation mot de passe </label>
-        <input type="password" name="confpassword" id="">
+        <input type="password" name="confpassword" id="confpassword">
 
         <button type="submit" name="inscription">Inscription</button>
     </form>
