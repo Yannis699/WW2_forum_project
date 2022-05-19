@@ -37,12 +37,15 @@ if (isset($_POST['valider'])) {
 </head>
 
 <body>
+    <h1> Se connecter</h1>
     <form action="" method="post">
+        <label for="pseudo">Pseudo</label>
         <input type="text" name="pseudo" autocomplete="off">
         <br>
+        <label for="password">Mot de passe</label>
         <input type="password" name="mdp">
         <br><br>
-        <input type="submit" name="valider">
+        <button type="submit" name="connexion"> Se connecter </button>
     </form>
 </body>
 
