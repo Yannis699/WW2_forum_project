@@ -1,19 +1,27 @@
 <?php
 
 session_start();
-if (isset($_POST['valider'])) {
-    if (!empty($_POST['pseudo']) && !empty($_POST['mdp'])) {
+if (isset($_POST['connexion'])) {
+
+    $data = array_map('trim', $_POST);
+    extract($data);
+
+    $pseudo = $data['pseudo'];
+    $password = $data['mdp'];
+
+
+    if (!empty($data['pseudo']) && !empty($data['mdp'])) {
         $pseudo_par_defaut = "admin";
         require_once('db.php');
 
-        $pseudo_saisi = htmlspecialchars($_POST['pseudo']);
-        $mdp_saisi = htmlspecialchars($_POST['mdp']);
+        $pseudo_saisi = htmlspecialchars($data['pseudo']);
+        $mdp_saisi = htmlspecialchars($data['mdp']);
 
         if ($pseudo_saisi == $pseudo_par_defaut && $mdp_saisi == $mdp_par_defaut) {
             $_SESSION['mdp'] = $mdp_saisi;
             header('Location: index.php');
         } else {
-            echo "Votre mot de passe est incorrect";
+            echo "La combinaison est incorrect";
             die();
         }
     } else {
