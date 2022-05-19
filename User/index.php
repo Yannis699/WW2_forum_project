@@ -34,10 +34,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Inscription</a>
+          <a class="nav-link active" aria-current="page" href="inscription.php">Inscription</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Connexion</a>
+          <a class="nav-link" href="user_connexion.php">Connexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../connexion.php">Admin</a>
         </li>
       </ul>
     </div>
