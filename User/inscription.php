@@ -61,7 +61,6 @@ require_once('../db.php');
         if(empty($password)){
             $valid = false;
             $err_password = "Le champ ne peut pas être vide";
-
         } 
         
         elseif(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
